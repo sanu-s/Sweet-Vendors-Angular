@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+html,body {
+    height: 100%;
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 99999 !important;
+ }

@@ -1,0 +1,140 @@
+<div class="col-md-12" style="padding: 0;">
+  <div class="card" style="margin-bottom: 0;">
+    <div class="card-header card-header-danger" style="margin-top: -50px;">
+      <h4 class="card-title">{{user?'Owner Details':'Create Owner'}}</h4>
+      <p class="card-category">{{user?'':'Fill theform to create an Owner'}}</p>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="adminForm" (ngSubmit)="onAdminSubmit()">
+        <div class="row" *ngIf="!user">
+          <!-- <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Company (disabled)" disabled>
+                                  </mat-form-field>
+                              </div> -->
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name" type="text" formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            </mat-form-field>
+            <!-- <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Name is required</div>
+                            </div> -->
+          </div>
+        </div>
+        <div class="row"> 
+          <div class="col-md-12" *ngIf="!user">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Email" type="text" formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+              <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                      <div *ngIf="f.email.errors.required">email is required</div>
+                                  </div> -->
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row"> 
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Website" type="text" formControlName="website"
+                [ngClass]="{ 'is-invalid': submitted && f.website.errors }" />
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Phone" type="text" formControlName="phone" minLength="10" maxLength="10"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Company" type="text" formControlName="company"
+                [ngClass]="{ 'is-invalid': submitted && f.company.errors }" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Address" type="text" formControlName="address"
+                [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Country" type="text" formControlName="country"
+                [ngClass]="{ 'is-invalid': submitted && f.country.errors }"  readonly/>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>State</mat-label>
+              <mat-select formControlName="state" *ngIf="!user" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                <mat-option *ngFor="let place of state_dist" [value]="place">{{place.state}}</mat-option>
+              </mat-select>
+
+              <input matInput *ngIf="user" placeholder="state" type="text" formControlName="state"
+              [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>District</mat-label>
+              <mat-select formControlName="district" *ngIf="!user" [ngClass]="{ 'is-invalid': submitted && f.district.errors }">
+                <mat-option *ngFor="let dist of adminForm.controls.state.value.districts" [value]="dist">{{dist}}
+                </mat-option>
+              </mat-select>
+
+              <input matInput *ngIf="user" placeholder="district" type="text" formControlName="district"
+              [ngClass]="{ 'is-invalid': submitted && f.district.errors }" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="City" type="text" formControlName="city"
+                [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-8">
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" placeholder="Postal code" formControlName="postalcode" minLength="6"
+                maxLength="6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                [ngClass]="{ 'is-invalid': submitted && f.postalcode.errors }" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Aadhar no." type="text" formControlName="aadhar"
+                [ngClass]="{ 'is-invalid': submitted && f.aadhar.errors }" minLength="12"
+                maxLength="12" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+            </mat-form-field>
+
+            <!-- <div class="form-group">
+
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                          <textarea class="form-control" rows="5"></textarea>
+                                      </div>
+                                  </div> -->
+          </div>
+        </div>
+        <div *ngIf="!user">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>Close</button>
+        <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit</button>
+        <div class="clearfix"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

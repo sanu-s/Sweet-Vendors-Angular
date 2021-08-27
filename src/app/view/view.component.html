@@ -1,0 +1,92 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Simple Table</h4>
+                      <p class="card-category"> Here is a subtitle for this table</p>
+                      <div class="create-btn" (click)="selected_owner=''" data-toggle="modal" data-target="#exampleModal">+</div>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th scope="col">
+                                      Id
+                                  </th>
+                                  <th scope="col" sortable="name" (sort)="onSort($event)">
+                                      Name
+                                  </th>
+                                  <th scope="col" sortable="email" (sort)="onSort($event)">
+                                      Email
+                                  </th>
+                                  <th scope="col" sortable="created_at" (sort)="onSort($event)">
+                                      Created_at
+                                  </th>
+                                  <th scope="col" sortable="active" (sort)="onSort($event)">
+                                      Active
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor = "let owner of users?.owner_list; let i = index" (click)="onView(owner.id)" style="cursor: pointer;"  data-toggle="modal" data-target="#exampleModal">
+                                      <td>
+                                          {{i+1}}
+                                      </td>
+                                      <td>
+                                          {{owner.name}}
+                                      </td>
+                                      <td>
+                                          {{owner.email}}
+                                      </td>
+                                      <td>
+                                          {{owner.created_at}}
+                                      </td>
+                                      <td>
+                                          {{owner.is_active?'True':'False'}}
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <!-- <nav aria-label="Page navigation example" style="width: 99%;">
+                            <ul class="pagination justify-content-end">
+                              <li class="page-item" [ngClass]="{'disabled': (users?.page - 1) === 0 }" (click)="users?.page - 1 === 0 ? '':pageSwitch(users?.page - 1)" >
+                                <a class="page-link" href="javascript:void(0)" tabindex="-1">Previous</a>
+                              </li>
+                              <li class="page-item active" [ngClass]="{'active': i == selected - 1}" *ngFor="let item of [].constructor(users?.page_count); let i = index" (click)="pageSwitch(i+1)" ><a class="page-link" href="javascript:void(0)" >{{i+1}}</a></li>
+                              <li class="page-item" [ngClass]="{'disabled': (users?.page + 1) > users?.page_count }" (click)="users?.page + 1 > users?.page_count?'':pageSwitch(users?.page + 1)" >
+                                <a class="page-link" href="javascript:void(0)">Next</a>
+                              </li>
+                            </ul>
+                          </nav> -->
+                          <ngb-pagination style="width: 99%;" [collectionSize]="collectionSize" class="d-flex justify-content-end" (pageChange)="pageSwitch($event)" [pageSize]="pageSize" [(page)]="page"></ngb-pagination>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+      <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      <!-- </div> -->
+      <!-- <div class="modal-body"> -->
+        <app-create [owner] = "selected_owner" (onCreate)="onCreate($event)" ></app-create>
+      <!-- </div> -->
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-4 log-box">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">{{fpwd?'Forgot Password':'Sign In'}}</h4>
+                      <p class="card-category">{{fpwd?'Enter your email address':'Login to your account'}}</p>
+                  </div>
+                  <div class="card-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                          <div class="row">
+                              <div class="col-md-12">
+                                <!-- <mat-form-field class="example-full-width"> -->
+                                    <div class="form-group">
+                                        <label for="username">Email</label>
+                                        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                            <div *ngIf="f.username.errors.required">email is required</div>
+                                        </div>
+                                    </div>
+                                  <!-- </mat-form-field> -->
+                              </div>
+                   
+                          </div>
+                          <div class="row" *ngIf="!fpwd">
+                              <div class="col-md-12">
+                                <!-- <mat-form-field class="example-full-width"> -->
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">Password is required</div>
+                                        </div>
+                                    </div>
+                                <!-- </mat-form-field> -->
+                              </div>
+
+                          </div>
+             
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{fpwd?'Send':'Sign In'}}</button>
+                          <a href="javascript:void(0)" (click)="fpwd?(fpwd=false):(fpwd=true)">{{!fpwd?'Forgot password':'Back to login'}}</a>
+                          <div class="clearfix"></div>
+                      </form>
+                      
+                  </div>
+              </div>
+          </div>
+         
+      </div>
+  </div>
+</div>
